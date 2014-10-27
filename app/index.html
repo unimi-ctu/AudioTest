@@ -37,6 +37,7 @@
         <p class="lead">
           <audio id="player" src="Ending_Satellites_-_06_-_A_floating_point.mp3" controls></audio>
           <button class="btn btn-default" id="play">Play</button>
+          <button class="btn btn-default" id="check">Is Ended?</button>
         </p>
       </div>
 
@@ -83,8 +84,23 @@
         <!-- endbuild -->
 
         <script>
-          $('#play').click(function() {
-            $('#player')[0].play();
+          var canplay = 2;
+          var playButton = $('#play');
+          var mp3Player = $('#player');
+          var mp3Element = mp3Player[0];
+
+          playButton.click(function() {
+            if (canplay && mp3Element.paused) {
+              playButton.text('sto pleiando');
+              mp3Element.play();
+              canplay -= 1;
+            }
+          });
+          $('#player')[0].addEventListener('ended', function() {
+            playButton.text(canplay ? 'play' : 'non posso più pleiare');
+          });
+          $('#check').click(function() {
+            console.log(mp3Element.paused ? 'audio in pausa' : 'audio in play');
           });
         </script>
 </body>
