@@ -35,10 +35,10 @@
       <div class="jumbotron">
         <h1>Prove Audio</h1>
         <p class="lead">
-          <audio id="player" src="Ending_Satellites_-_06_-_A_floating_point.mp3"></audio>
+          <audio id="player" src="Ending_Satellites_-_06_-_A_floating_point.mp3" controls></audio>
         </p>
         <p>
-          <button class="btn btn-default" id="play">Play</button>
+          <button class="btn btn-default" id="play">play</button>
         </p>
       </div>
 
@@ -90,16 +90,27 @@
           var mp3Player = $('#player');
           var mp3Element = mp3Player[0];
 
-          playButton.click(function() {
+          playButton.click(function(e) {
+            e.preventDefault();
+            play();
+          });
+
+          var play = function() {
             if (canplay && mp3Element.paused) {
-              playButton.text('sto pleiando');
+              playButton.attr("disabled", "disabled");
+              playButton.text(canplay === 2 ? "now is playing" : "now is replaying");
               mp3Element.play();
               canplay -= 1;
             }
-          });
+            else {
+              playButton.attr("disabled", "disabled");
+              playButton.text("can't play it any more");
+            }
+
+          };
 
           $('#player')[0].addEventListener('ended', function() {
-            playButton.text(canplay ? 'play' : 'non posso più pleiare');
+            play();
           });
 
         </script>
