@@ -35,9 +35,10 @@
       <div class="jumbotron">
         <h1>Prove Audio</h1>
         <p class="lead">
-          <audio id="player" src="Ending_Satellites_-_06_-_A_floating_point.mp3" controls></audio>
+          <audio id="player" src="Ending_Satellites_-_06_-_A_floating_point.mp3"></audio>
+        </p>
+        <p>
           <button class="btn btn-default" id="play">Play</button>
-          <button class="btn btn-default" id="check">Is Ended?</button>
         </p>
       </div>
 
@@ -96,12 +97,11 @@
               canplay -= 1;
             }
           });
+
           $('#player')[0].addEventListener('ended', function() {
             playButton.text(canplay ? 'play' : 'non posso più pleiare');
           });
-          $('#check').click(function() {
-            console.log(mp3Element.paused ? 'audio in pausa' : 'audio in play');
-          });
+
         </script>
 </body>
 </html>
